@@ -1,0 +1,49 @@
+.sidebar {
+    min-width: 260px;
+    background: #c2185b;
+    color: #fff;
+    height: 100%;
+
+    &__header {
+        display: flex;
+        padding-bottom: 10px;
+        padding: 13px;
+        justify-content: space-between;
+    }
+
+    &__info {
+        flex: 1;
+
+        h2 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        h3 {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 400;
+
+            .mat-icon {
+                font-size: 16px;
+                line-height: 16px;
+                width: 16px;
+                margin-right: 5px;
+                height: 16px;
+                color: green;
+            }
+        }
+    }
+
+    &__create-button {
+        background-color: #303030;
+        color: #fff;
+
+        .mat-icon {
+            font-size: 19px;
+            line-height: 24px;
+        }
+    }
+}

@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MatIconModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

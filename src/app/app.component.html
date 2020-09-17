@@ -1,7 +1,18 @@
-<app-header></app-header>
+<div class="app">
+    <div class="app__header mat-elevation-z8">
+        <app-header></app-header>
+    </div>
 
-<div class="app__body">
-    <app-sidebar></app-sidebar>
+    <div class="app__body">
+        <mat-sidenav-container class="example-container">
+            <mat-sidenav mode="side" opened>
+                <app-sidebar></app-sidebar>
+            </mat-sidenav>
+
+            <mat-sidenav-content>Main content</mat-sidenav-content>
+        </mat-sidenav-container>
+    </div>
 </div>
+
 
 <!-- <router-outlet></router-outlet> -->
