@@ -1,24 +1,17 @@
-.app {
-    &__header {
-        position: fixed;
-        top: 0;
-        z-index: 10000;
-        width: 100%;
+::ng-deep ngx-spinner .la-ball-fussion {
+    div:first-child {
+        background-color: rgba(91,178,129,1) !important;
     }
 
-    &__body {
-        height: 100%;
-        padding-top: 60px;
+    div:nth-child(2) {
+        background-color: rgba(228,178,76,1) !important;
+    }
 
-        .mat-sidenav-container {
-            width: 100vw;
-            height: 100vh;
+    div:nth-child(3) {
+        background-color: rgba(207,55,92,1) !important;
+    }
 
-            .mat-sidenav {
-                max-width: 260px;
-                position: fixed;
-                top: 60px;
-            }
-        }
+    div:nth-child(4) {
+        background-color: rgba(98,192,235,1) !important;
     }
 }

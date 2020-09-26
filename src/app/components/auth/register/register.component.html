@@ -1,0 +1,65 @@
+<div class="register">
+    <div class="register__header">
+        <div class="register__header-logo">
+            <img src="assets/logo.png" alt="App logo">
+        </div>
+        <h3 class="register__header-title">SIGN UP</h3>
+    </div>
+    <form class="register__form" [formGroup]="registrationForm">
+        <mat-form-field class="register__form-input" color="accent" appearance="outline" floatLabel="auto">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput type="email" placeholder="Email">
+            <mat-error *ngIf="registrationForm.touched && registrationForm.controls.email.errors?.required">
+                Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="registrationForm.touched && registrationForm.controls.email.errors?.email">
+                Email must be a valid email address
+            </mat-error>
+            <mat-error *ngIf="registrationForm.controls.email.errors?.serverErrorEmail">
+                {{ registrationForm.controls.email.errors?.serverErrorEmail }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="register__form-input" color="accent" appearance="outline" floatLabel="auto">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput type="password" placeholder="Password" >
+            <mat-error *ngIf="registrationForm.touched && registrationForm.controls.password.errors?.required">
+                Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="registrationForm.touched && registrationForm.controls.password.errors?.minlength">
+                Password must be at least 6 characters
+            </mat-error>
+        </mat-form-field>
+
+        <button type="button" mat-flat-button (click)="emailRegistration()" [disabled]="registrationForm.invalid">
+            Sign up
+        </button>
+    </form>
+
+    <div class="register__social">
+        <span class="register__social-text">Social Register</span>
+
+        <ul class="register__social-list">
+            <li>
+                <button mat-mini-fab aria-label="Login with Google" (click)="loginWithGoogle()">
+                    <img src="assets/google.png" alt="">
+                </button>
+            </li>
+            <li>
+                <button mat-mini-fab aria-label="Login with Facebook" (click)="loginWithFacebook()">
+                    <img src="assets/facebook.png" alt="">
+                </button>
+            </li>
+            <li>
+                <button mat-mini-fab aria-label="Login with Github" (click)="loginWithGithub()">
+                    <img src="assets/github.png" alt="">
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="register__login-link">
+        <span class="register__login-link-text">Already have an Account?</span>
+        <a routerLink="/auth/login">Login</a>
+    </div>
+</div>

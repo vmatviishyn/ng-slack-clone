@@ -1,0 +1,69 @@
+<div class="login">
+    <div class="login__header">
+        <div class="login__header-logo">
+            <img src="assets/logo.png" alt="App logo">
+        </div>
+        <h3 class="login__header-title">LOGIN</h3>
+    </div>
+
+    <form class="login__form" [formGroup]="loginForm">
+        <mat-form-field class="login__form-input" color="accent" appearance="outline" floatLabel="auto">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput type="email" placeholder="Email">
+            <mat-error *ngIf="loginForm.touched && loginForm.controls.email.errors?.required">
+                Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="loginForm.touched && loginForm.controls.email.errors?.email">
+                Email must be a valid email address
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls.email.errors?.serverErrorEmail">
+                {{ loginForm.controls.email.errors?.serverErrorEmail }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="login__form-input" color="accent" appearance="outline" floatLabel="auto">
+            <mat-label>Password</mat-label>
+            <input  formControlName="password" matInput type="password" placeholder="Password">
+            <mat-error *ngIf="loginForm.touched && loginForm.controls.password.errors?.required">
+                Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="loginForm.touched && loginForm.controls.password.errors?.minlength">
+                Password must be at least 6 characters
+            </mat-error>
+            <mat-error *ngIf="loginForm.controls.password.errors?.serverErrorPassword">
+                {{ loginForm.controls.password.errors?.serverErrorPassword }}
+            </mat-error>
+        </mat-form-field>
+
+        <button type="button" (click)="emailLogin()" mat-flat-button [disabled]="loginForm.invalid">
+            Login
+        </button>
+    </form>
+
+    <div class="login__social">
+        <span class="login__social-text">Social Login</span>
+
+        <ul class="login__social-list">
+            <li>
+                <button mat-mini-fab aria-label="Login with Google" (click)="loginWithGoogle()">
+                    <img src="assets/google.png" alt="">
+                </button>
+            </li>
+            <li>
+                <button mat-mini-fab aria-label="Login with Facebook" (click)="loginWithFacebook()">
+                    <img src="assets/facebook.png" alt="">
+                </button>
+            </li>
+            <li>
+                <button mat-mini-fab aria-label="Login with Github" (click)="loginWithGithub()">
+                    <img src="assets/github.png" alt="">
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="login__register-link">
+        <span class="login__register-link-text">Don't have an Account?</span>
+        <a routerLink="/auth/register">Sign Up</a>
+    </div>
+</div>

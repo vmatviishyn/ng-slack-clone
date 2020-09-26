@@ -1,0 +1,127 @@
+.login {
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+
+
+    &__header {
+        margin-top: 50px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__header-logo {
+        img {
+            height: 120px;
+            object-fit: contain;
+            width: 120px;
+        }
+    }
+
+    &__header-title {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    &__form {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 80%;
+
+        mat-form-field {
+            width: 100%;
+            font-size: 14px;
+        }
+
+        ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+            padding: 0.4em 0px !important;
+        }
+
+        ::ng-deep .mat-form-field-label-wrapper {
+            top: -1.5em;
+        }
+
+        ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+            transform: translateY(-1.1em) scale(.75);
+            width: 133.33333%;
+        }
+
+        mat-label {
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 4px;
+            width: 100%;
+            font-size: 14px;
+        }
+    }
+
+    &__social {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__social-text {
+        color: grey;
+    }
+
+    &__social-list {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 10px;
+        display: flex;
+
+        li {
+            margin: 0 5px;
+
+            button {
+                height: 45px;
+                width: 45px;
+
+                ::ng-deep .mat-button-wrapper {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    justify-content: center;
+                    padding: 0;
+                    width: 100%;
+                }
+
+                img {
+                    height: 30px;
+                    object-fit: cover;
+                    width: 30px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+
+    &__register-link {
+        margin-bottom: 50px;
+
+        a {
+            color: #b0bec5;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+    }
+
+    &__register-link-text {
+        margin-right: 5px;
+        font-size: 14px;
+        color: grey;
+    }
+}
