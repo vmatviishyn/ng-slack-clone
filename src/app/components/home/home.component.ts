@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { DeviceService } from 'src/app/services/device.service';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +8,13 @@ import { DeviceService } from 'src/app/services/device.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  isPWA = false;
+  user$: Observable<any>;
 
   constructor(
-    private deviceService: DeviceService,
-    private authService: AuthService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
-    this.isPWA = this.deviceService.isPWA();
-  }
-
-  logout(): void {
-    this.authService.logout();
+    this.user$ = this.userService.getUser();
   }
 }

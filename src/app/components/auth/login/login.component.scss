@@ -36,9 +36,17 @@
         justify-content: center;
         width: 80%;
 
+        @media only screen and (min-width: 768px) {
+            width: 440px;
+        }
+
         mat-form-field {
             width: 100%;
             font-size: 14px;
+
+            @media only screen and (min-width: 768px) {
+                font-size: 16px;
+            }
         }
 
         ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
@@ -56,12 +64,20 @@
 
         mat-label {
             font-size: 14px;
+
+            @media only screen and (min-width: 768px) {
+                font-size: 16px;
+            }
         }
 
         button {
             margin-top: 4px;
             width: 100%;
             font-size: 14px;
+
+            @media only screen and (min-width: 768px) {
+                font-size: 16px;
+            }
         }
     }
 
@@ -116,6 +132,10 @@
             font-size: 14px;
             text-decoration: none;
             font-weight: 700;
+
+            @media only screen and (min-width: 768px) {
+                font-size: 16px;
+            }
         }
     }
 
@@ -123,5 +143,9 @@
         margin-right: 5px;
         font-size: 14px;
         color: grey;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 16px;
+        }
     }
 }

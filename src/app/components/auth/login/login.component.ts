@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../../services/auth.service';
 import { LoaderService } from '../../../services/loader.service';
 
@@ -9,7 +11,9 @@ import { LoaderService } from '../../../services/loader.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  private unsubscribe$ = new Subject<void>();
+
   loginForm: FormGroup;
 
   constructor(
@@ -35,45 +39,70 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.invalid) { return; }
 
-    this.authService.loginWithEmail(this.loginForm.value).then(() => {
-      this.loginForm.reset();
-      this.router.navigate(['/home']);
-      this.loader.hide();
-    }).catch(error => {
-      switch (error.code) {
-        case 'auth/wrong-password':
-          this.loginForm.get('password').setErrors({ serverErrorPassword: 'Password is incorrect' });
-          break;
-        case 'auth/user-not-found':
-          this.loginForm.get('email').setErrors({ serverErrorEmail: 'There is no user with such email' });
-          break;
-        default:
-          break;
-      }
+    this.authService.loginWithEmail(this.loginForm.value)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        () => {
+          this.loginForm.reset();
+          this.router.navigate(['/home']);
+          this.loader.hide();
+        }, error => {
+          switch (error.code) {
+            case 'auth/wrong-password':
+              this.loginForm.get('password').setErrors({ serverErrorPassword: 'Password is incorrect' });
+              break;
+            case 'auth/user-not-found':
+              this.loginForm.get('email').setErrors({ serverErrorEmail: 'There is no user with such email' });
+              break;
+            default:
+              break;
+          }
 
-      this.loader.hide();
-    });
+          this.loader.hide();
+      });
   }
 
   loginWithGoogle(): void {
-    this.authService.loginWithGoogle().subscribe(() => {
-      this.router.navigate(['/home']);
-    });
+    this.loader.show();
+
+    this.authService.loginWithGoogle()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+        this.loader.hide();
+      });
   }
 
   loginWithFacebook(): void {
-    this.authService.loginWithFacebook().subscribe(() => {
-      this.router.navigate(['/home']);
-    });
+    this.loader.show();
+
+    this.authService.loginWithFacebook()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+        this.loader.hide();
+      });
   }
 
   loginWithGithub(): void {
-    this.authService.loginWithGithub().subscribe(() => {
-      this.router.navigate(['/home']);
-    }, error => {
-      if (error.code === 'auth/account-exists-with-different-credential') {
-       console.error('ERROR:::', 'User with such email already exists');
-      }
-    });
+    this.loader.show();
+
+    this.authService.loginWithGithub()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+        this.loader.hide();
+      },
+      error => {
+        this.loader.hide();
+        if (error.code === 'auth/account-exists-with-different-credential') {
+          console.error('ERROR:::', 'User with such email already exists');
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

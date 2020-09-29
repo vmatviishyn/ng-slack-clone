@@ -1,1 +1,11 @@
-<button (click)="logout()">Logout</button>
+<div class="app">
+    <div class="app__header mat-elevation-z8">
+        <app-header [user]="user$ | async"></app-header>
+    </div>
+
+    <div class="app__body">
+    </div>
+
+    <div class="app__footer mat-elevation-z8">
+    </div>
+</div>

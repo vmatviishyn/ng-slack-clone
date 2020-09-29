@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../../services/auth.service';
 import { LoaderService } from '../../../services/loader.service';
 
@@ -11,6 +13,8 @@ import { LoaderService } from '../../../services/loader.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  private unsubscribe$ = new Subject<void>();
+
   registrationForm: FormGroup;
 
   constructor(
@@ -36,37 +40,56 @@ export class RegisterComponent implements OnInit {
 
     if (this.registrationForm.invalid) { return; }
 
-    this.authService.registerWithEmail(this.registrationForm.value).then(() => {
-      this.registrationForm.reset();
-      this.router.navigate(['/home']);
-      this.loader.hide();
-    }).catch(error => {
-      this.registrationForm.get('email').setErrors({
-        serverErrorEmail: error.message
-      });
-      this.loader.hide();
-    });
+    this.authService.registerWithEmail(this.registrationForm.value)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        () => {
+          this.registrationForm.reset();
+          this.router.navigate(['/home']);
+          this.loader.hide();
+        }, error => {
+          this.registrationForm.get('email').setErrors({
+            serverErrorEmail: error.message
+          });
+          this.loader.hide();
+        });
   }
 
   loginWithGoogle(): void {
-    this.authService.loginWithGoogle().subscribe(() => {
-      this.router.navigate(['/home']);
-    });
+    this.loader.show();
+
+    this.authService.loginWithGoogle()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+        this.loader.hide();
+      });
   }
 
   loginWithFacebook(): void {
-    this.authService.loginWithFacebook().subscribe(() => {
-      this.router.navigate(['/home']);
-    });
+    this.loader.show();
+
+    this.authService.loginWithFacebook()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+        this.loader.hide();
+      });
   }
 
   loginWithGithub(): void {
-    this.authService.loginWithGithub().subscribe(() => {
-      this.router.navigate(['/home']);
-    }, error => {
-      if (error.code === 'auth/account-exists-with-different-credential') {
-       console.warn('ERROR:::', 'User with such email already exists');
-      }
-    });
+    this.loader.show();
+
+    this.authService.loginWithGithub()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => {
+        this.router.navigate(['/home']);
+        this.loader.hide();
+      }, error => {
+        this.loader.hide();
+        if (error.code === 'auth/account-exists-with-different-credential') {
+          console.warn('ERROR:::', 'User with such email already exists');
+        }
+      });
   }
 }
