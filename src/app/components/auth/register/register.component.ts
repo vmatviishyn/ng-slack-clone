@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         () => {
           this.registrationForm.reset();
-          this.router.navigate(['/home']);
+          this.router.navigate(['/app']);
           this.loader.hide();
         }, error => {
           this.registrationForm.get('email').setErrors({
@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
     this.authService.loginWithGoogle()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app']);
         this.loader.hide();
       });
   }
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
     this.authService.loginWithFacebook()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app']);
         this.loader.hide();
       });
   }
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
     this.authService.loginWithGithub()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app']);
         this.loader.hide();
       }, error => {
         this.loader.hide();

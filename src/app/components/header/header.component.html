@@ -1,6 +1,6 @@
 <mat-toolbar class="header ">
     <div class="header__left">
-        <mat-icon aria-hidden="false" aria-label="Time icon">access_time</mat-icon>
+        <svg-icon class="svg-icon" key="clock"></svg-icon>
     </div>
 
     <div class="header__search">
@@ -11,20 +11,22 @@
     </div>
 
     <div class="header__right">
-        <mat-icon aria-hidden="false" aria-label="Time icon">help_outline</mat-icon>
+        <svg-icon class="svg-icon" key="circleHelp"></svg-icon>
 
         <div class="header__avatar" >
             <button mat-button [matMenuTriggerFor]="myAccountMenu" class="header__avatar-menu-btn">
                 <img *ngIf="user?.profilePhoto" [src]="user?.profilePhoto" alt="">
                 <div *ngIf="!user?.profilePhoto" class="header__avatar-fallback">
-                    <mat-icon aria-hidden="false" aria-label="User icon">person</mat-icon>
+                    <svg-icon class="svg-icon" key="user"></svg-icon>
                 </div>
             </button>
 
             <mat-menu #myAccountMenu="matMenu" xPosition="before" class="header__avatar-menu">
                 <p class="header__avatar-user-name">{{ user?.name }}</p>
                 <hr>
-                <button mat-menu-item (click)="logout()">Logout</button>
+                <button mat-menu-item (click)="logout()" class="header__avatar-menu-logout">
+                    <span>Logout</span>
+                </button>
             </mat-menu>
         </div>
     </div>

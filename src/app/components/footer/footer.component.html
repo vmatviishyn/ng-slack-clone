@@ -1,0 +1,28 @@
+<mat-toolbar class="footer">
+    <ul>
+        <li>
+            <a routerLink="/app" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <svg-icon class="svg-icon" key="home"></svg-icon>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="./direct" routerLinkActive="active">
+                <svg-icon class="svg-icon" key="inbox"></svg-icon>
+                <span>Messages</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="./mentions" routerLinkActive="active">
+                <svg-icon class="svg-icon" key="tag"></svg-icon>
+                <span>Mentions</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="./account" routerLinkActive="active">
+                <svg-icon class="svg-icon" key="user"></svg-icon>
+                <span>You</span>
+            </a>
+        </li>
+    </ul>
+</mat-toolbar>

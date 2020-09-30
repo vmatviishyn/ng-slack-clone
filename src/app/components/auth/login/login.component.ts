@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           this.loginForm.reset();
-          this.router.navigate(['/home']);
+          this.router.navigate(['/app']);
           this.loader.hide();
         }, error => {
           switch (error.code) {
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.loginWithGoogle()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app']);
         this.loader.hide();
       });
   }
@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.loginWithFacebook()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app']);
         this.loader.hide();
       });
   }
@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.loginWithGithub()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/app']);
         this.loader.hide();
       },
       error => {

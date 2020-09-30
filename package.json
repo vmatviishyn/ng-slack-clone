@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod",
+    "generate-icons": "svg-to-ts"
   },
   "engines": {
     "node": "12.10.0",
@@ -30,6 +31,7 @@
     "@angular/platform-browser-dynamic": "~10.0.4",
     "@angular/router": "~10.0.4",
     "@angular/service-worker": "~10.0.4",
+    "@ngneat/svg-icon": "^1.0.0",
     "express": "^4.17.1",
     "firebase": "^7.21.0",
     "ngx-spinner": "^10.0.1",
@@ -58,6 +60,23 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.5"
+    "typescript": "~3.9.5",
+    "svg-to-ts": "^5.0.0"
+  },
+  "svg-to-ts": {
+    "conversionType": "object",
+    "srcFiles": [
+      "./src/assets/svg/*.svg"
+    ],
+    "outputDirectory": "./src/assets/svg",
+    "fileName": "svg-icons",
+    "svgoConfig": {
+      "plugins": [
+        {
+          "removeDimensions": true,
+          "cleanupAttrs": true
+        }
+      ]
+    }
   }
 }

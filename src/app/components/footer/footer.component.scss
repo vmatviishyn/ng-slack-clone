@@ -1,0 +1,38 @@
+.footer {
+    background-color: #000;
+    height: 80px;
+
+    ul {
+        align-items: flex-start;
+        display: flex;
+        justify-content: space-around;
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+
+        li a {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            text-decoration: none;
+            color: #1f1f1f;
+
+            &.active {
+                color: #fff;
+
+                ::ng-deep .svg-icon {
+                    path {
+                        fill: #fff;
+                    }
+                }
+            }
+
+            span {
+                font-weight: 500;
+                font-size: 14px;
+            }
+        }
+
+    }
+}

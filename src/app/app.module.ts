@@ -6,6 +6,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SvgIconsModule } from '@ngneat/svg-icon';
+import icons from '../assets/svg/svg-icons';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -22,6 +24,11 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ChannelsComponent } from './components/home/channels/channels.component';
+import { AccountComponent } from './components/home/account/account.component';
+import { DirectComponent } from './components/home/direct/direct.component';
+import { MentionsComponent } from './components/home/mentions/mentions.component';
 
 // Material modules
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -40,6 +47,11 @@ import { MatMenuModule } from '@angular/material/menu';
     SplashScreenComponent,
     HomeComponent,
     RegisterComponent,
+    FooterComponent,
+    AccountComponent,
+    DirectComponent,
+    MentionsComponent,
+    ChannelsComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +63,7 @@ import { MatMenuModule } from '@angular/material/menu';
     AngularFireStorageModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    SvgIconsModule.forRoot({ icons }),
     BrowserAnimationsModule,
     NgxSpinnerModule,
     MatToolbarModule,

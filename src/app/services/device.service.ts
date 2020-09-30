@@ -32,6 +32,6 @@ export class DeviceService {
   }
 
   isMobilePwa(): boolean {
-    return this.isMobilePwa && window.matchMedia('(display-mode: standalone)').matches;
+    return this.isMobile() && window.matchMedia('(display-mode: standalone)').matches;
   }
 }
